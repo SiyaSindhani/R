@@ -1,0 +1,94 @@
+#q1 a
+
+x=rep("gold",20)
+y=rep("silver",30)
+z=rep("bronze",50)
+
+v1=c(x,y,z)
+sample(v1,size=10)
+
+
+
+#q1 b
+#here we need to include replacement
+sample(c("s","f"),10,replace=T,prob=c(0.9,0.1))
+
+
+
+v = c(rep("Gold",20),rep("Silver",30),rep("Bronze",50))
+?rep#used to replicate that number of times-like gold will be in the vec 20 times
+
+sample(v,10,replace = FALSE)
+?replace#FALSE-for the case that once you draw you are not replacing the coin back
+
+#Q1(b)
+sample(c("Success","Failure"),10,replace=TRUE,prob=c(0.9,0.1))
+
+
+#q3
+
+p_c=0.4
+p_r=0.2
+p_cr=0.85
+
+cp=function(p_c,p_r,p_cr){
+  p_rc=p_r*p_cr/p_c
+  return (p_rc)
+}
+p_rc
+
+#q4
+
+iris
+mtcars
+data=iris
+head(data,7)
+str(data)#structure
+
+#$ is used to select a particular row
+data$Sepal.Length
+#range
+range(data$Sepal.Length)
+mean(data$Sepal.Length)
+
+#finding quartiles
+
+q3=quantile(data$Sepal.Length,0.75)
+q1=quantile(data$Sepal.Length,0.25)
+q3-q1
+
+#standard deviation
+sd(data$Sepal.Length)
+#variance 
+var(data$Sepal.Length)
+
+summary(data)
+lapply(data[,1:4],sd)#first four columns standard deviation
+
+
+#q2
+n=23
+r=function(n){
+  #inbuilt comman factorial
+  #choose is for combination
+  prob=1-((choose(365,n))*factorial(n))/(365)^n#we can use pbirthday to do tis directly
+  return(prob)
+}
+prob
+pbirthday(n=23,classes=365,coincident = 2)#shortcut
+#q2 part2
+qbirthday(prob=0.5,classes=365,coincident = 2)
+
+
+
+#q4 5th part
+v=c(2,1,2,3,1,2,3,4,1,5,5,3,2,3)
+getmode=function(v){
+  uniqv=unique(v)
+  match(v,uniqv)
+  tabulate(match(v,uniqv))
+  which.max(tabulate(match(v,uniqv)))
+  uniqv[which.max(tabulate(match(v,uniqv)))]
+}
+uniqv[1]
+
