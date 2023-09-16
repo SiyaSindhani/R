@@ -1,0 +1,74 @@
+#q1
+x=c(0,1,2,3,4)
+p=c(0.41,0.37,0.16,0.05,0.01)
+#we need to calculate expected value of x that is E(x)
+#E(x)=summatuion (x*p(x)) formula
+sum(x*p)
+weighted.mean(x,p)
+c(x%*%p)
+x%*%p
+
+
+#q2
+#for discrete summation and for continuous integration
+#integration of x*b(x)
+
+f=function(t){
+  t*0.1*exp(-0.1*t) 
+}
+E_x=integrate(f,0,Inf)#f,lower limit, upper limit
+
+E_x$value# $ for answer without abs error
+
+
+
+#q4
+#1st moment
+fx=function(x){
+  x*0.5*exp(-abs(x))
+}
+#2nd moment
+fx2=function(x){
+  x^2*0.5*exp(-abs(x))
+}
+expected=integrate(fx,1,10)
+expected2=integrate(fx2,1,10)
+expected$value
+expected2$value
+
+#variance
+#for variance formula is E(v)=E(x^2)-(E(x))^2
+var=expected2$value-(expected$value)^2
+var
+
+
+#q3
+#cost price=6*3 3 copies for 6$ each
+#x->number of sold copies
+#3-x->umber of unsold copies
+#selling price=12*x+2*(3-x)
+#et revenue=12x+2*(3-x)-18
+x=c(0,1,2,3)
+px=c(0.1,0.2,0.2,0.5)
+
+#probability of y is same as that of x
+
+y=function(x){
+  10*x-12
+}
+sum(y(x)*px)
+
+
+#q5
+px=function(y){
+  (3/4)*(1/4)^(y^(1/2)-1)
+}
+px(9)
+
+#expected value of y
+y=c(1,4,9,16,25)
+f1=sum(y*px(y))
+f2=sum(y^2*px(y))
+
+var=f2-f1^2
+var
