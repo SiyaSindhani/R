@@ -1,0 +1,47 @@
+#q1
+#a
+data=read.csv(file.choose())
+#b
+dim(data)
+head(data,10)
+#c
+mean(data$Wall.Thickness)
+hist(data$Wall.Thickness)
+#d
+abline(v=12.8,col="red")
+
+#this histogram is not a bell shaped curve hence this is not a normal distribution.
+#there should also be symmetry about the mean line and the max value should be only one, i.e. there should be only one peal in the histogram
+#HENCE NOW WE TRY TO MAKE IT A NORMAL DISTRIBUTION
+
+#a
+s10=c()
+for(i in 1:9000){
+  s=sample(data$Wall.Thickness,size=10,replace=TRUE)
+  s10[i]=mean(s)
+}
+hist(s10)
+plot(density(s10)) # to check if i got a somewhat bell shaped curve or not, not to be included in the ans during eval
+abline(v=12.8,col="red")
+
+#b
+for(i in 1:9000){
+  s=sample(data$Wall.Thickness,size=50,replace=TRUE)
+  s10[i]=mean(s)
+}
+hist(s10)
+abline(v=12.8,col="blue")
+
+for(i in 1:9000){
+  s=sample(data$Wall.Thickness,size=500,replace=TRUE)
+  s10[i]=mean(s)
+}
+hist(s10)
+abline(v=12.8,col="green")
+
+for(i in 1:9000){
+  s=sample(data$Wall.Thickness,size=9000,replace=TRUE)
+  s10[i]=mean(s)
+}
+hist(s10)
+abline(v=12.8,col="yellow")
