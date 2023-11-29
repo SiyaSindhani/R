@@ -1,0 +1,78 @@
+#Q1
+install.packages('pracma') #to be done only once
+library('pracma')
+f=function(x,y){
+  2*(2*x+3*y)/5
+}
+#i
+I=integral2(f,xmin=0,xmax=1,ymin=0,ymax=1)
+print(I$Q)
+#since value of I is 1 therefore it is a probability density function
+print(I$error)
+#ii
+gx=function(y){
+  f(1,y) #function call
+}
+I1=integral(gx,0,1) #f=give range of x
+print(I)
+#iii
+hy=function(x){
+  f(x,0)
+}
+I2=integral(hy,0,1) #give range of y
+print(I2)
+#iv
+#function xy mein bana ke double integral kar do
+g=function(x,y){
+  x*y*f(x,y)
+}
+I3=integral(g,xmin=0,xmax=1,ymin=0,ymax=1) #wrong
+
+#Q2
+f=function(x,y){
+  (x+y)/30
+}
+#i
+M=matrix(c(f(0,0:2),f(1,0:2),f(2,0:2),f(3,0:2)),nrow=4,ncol=3,byrow=TRUE)
+print(M)
+#ii
+sum(M)
+#iii
+m1=apply(M,1,sum) #to apply on rows-> 1, col->2, m1 means gx
+print(m1)
+#iv
+m2=apply(M,2,sum) #m2 means hy
+print(m2)
+#v
+condprob=M[1,2]/m2[2]
+print(condprob)
+#vi
+x=0:3
+y=0:2
+Ex=sum(x*m1)
+Ex2=sum((x^2)*m1)
+var_x=Ex2-Ex*Ex
+print(Ex)
+print(Ex2)
+print(var_x)
+
+Ey=sum(y*m2)
+Ey2=sum((y^2)*m2)
+var_y=Ey2-Ey*Ey
+print(Ey)
+print(Ey2)
+print(var_y)
+
+f1=function(x,y){
+  x*y*f(x,y)
+}
+M1=matrix(c(f1(0,0:2),f1(1,0:2),f1(2,0:2),f1(3,0:2)),nrow=4,ncol=3,byrow=TRUE)
+print(M1)
+Exy=sum(M1)
+print(Exy)
+
+COVxy=Exy-Ex*Ey
+print(COVxy)
+
+corrCoeff=(COVxy)/(var_x*var_y)^(1/2)
+print(corrCoeff)
